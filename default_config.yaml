@@ -1,0 +1,17 @@
+data_root: "Datasets"
+data_name_10A: "RML2016.10a_dict.pkl"
+data_name_04C: "2016.04C.multisnr.pkl"
+
+
+model_root: "checkpoints"
+checkpoints_10A: "m2sfe_10A.pth"
+checkpoints_04C: "m2sfe_04C.pth"
+checkpoints_DA: "a2c_backbone.pth"
+checkpoints_DA_disc: "a2c_discriminator.pth"
+show_confusion_metrix: False
+
+Epoch_num: 300
+lr: 0.001
+Batch_size: 64
+da_lr_g: 0.00001
+da_lr_d: 0.0001

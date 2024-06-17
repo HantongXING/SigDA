@@ -1,5 +1,5 @@
 # Contents
-Source code for the paper "SigDA: A Superimposed Domain Adaptation Framework for Automatic Modulation Classification", which is under review by IEEE Transactions on Wireless Communications.
+Source code for the paper "SigDA: A Superimposed Domain Adaptation Framework for Automatic Modulation Classification", which is accepted by IEEE Transactions on Wireless Communications.
 
 - [Contents](#Contents)
 - [Abstract](#Abstract)

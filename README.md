@@ -10,7 +10,8 @@ Source code for the paper "SigDA: A Superimposed Domain Adaptation Framework for
         - [Script Parameters](#script-parameters)
         - [Training Process](#training-process)         
         - [Evaluation Process](#evaluation-process)   
-        - [M2SFE Series](#M2SFE-Series)   
+        - [M2SFE Series](#M2SFE-Series)
+        - [Citation](#Citation)
 
 
 
@@ -200,4 +201,19 @@ and modify it as follows:
 ```python
    from model.m2sfe import M2SFE_tiny as M2SFE    # M2SFE-tiny model
    from model.m2sfe import M2SFE_medium as M2SFE  # M2SFE-medium model
+```
+
+## [Citation](#Contents)
+If you use this code for your research, please cite our [paper](https://ieeexplore.ieee.org/document/10557536):
+```
+@ARTICLE{10557536,
+  author={Wang, Shuang and Xing, Hantong and Wang, Chenxu and Zhou, Huaji and Hou, Biao and Jiao, Licheng},
+  journal={IEEE Transactions on Wireless Communications}, 
+  title={SigDA: A Superimposed Domain Adaptation Framework for Automatic Modulation Classification}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={1-1},
+  keywords={Feature extraction;Task analysis;Modulation;Adaptation models;Convolution;Data models;Wireless communication;Automatic Modulation Classification;Domain Adaptation;Multi-task learning;Adversarial training},
+  doi={10.1109/TWC.2024.3399067}}
 ```

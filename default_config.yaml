@@ -14,4 +14,4 @@ Epoch_num: 300
 lr: 0.001
 Batch_size: 64
 da_lr_g: 0.00001
-da_lr_d: 0.0001
+da_lr_d: 0.00001

@@ -137,7 +137,7 @@ Parameters for both training and evaluation can be set in config.py
   lr: 0.001                                        # learning rate of supervised training
   Batch_size: 64                                   # Training batch size
   da_lr_g: 0.00001                                 # learning rate of generator in domain adaptation process
-  da_lr_d: 0.0001                                  # learning rate of discriminator domain adaptation porcess
+  da_lr_d: 0.00001                                  # learning rate of discriminator domain adaptation porcess
   ```
 
 For more configuration details, please refer the script `config.py`.

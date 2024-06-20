@@ -24,7 +24,7 @@ def run_train():
     model = model.cuda()
     optimizer = optim.Adam(model.parameters(), lr=config.lr)
     criterion1 = nn.CrossEntropyLoss()
-    criterion2 = nn.MSELoss(reduce=True, size_average=True)
+    criterion2 = nn.MSELoss(reduce=True, size_average=False)
 
 
     precesion_previous = 0

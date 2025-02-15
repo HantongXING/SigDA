@@ -8,6 +8,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 warnings.filterwarnings('ignore')
 
+from model.feature_decoupling import feature_decoupling
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 checkpoint_root = os.path.join(current_dir, '../checkpoints', 'lstm.pth')
@@ -31,7 +32,8 @@ for epoch in range(1600):
     for i, data in enumerate(train_loader_all):
         train_data, train_label, train_snr = data
         train_data, train_label = train_data.cuda(), train_label.cuda()
-        logits, _ = model(train_data)
+        logits, features = model(train_data)
+        domain_features, invariant_features = feature_decoupling(features)
         loss = criterion1(logits, train_label)
         optimizer.zero_grad()
         loss.backward()
@@ -51,7 +53,8 @@ for epoch in range(1600):
     for i, data in enumerate(test_loader_all):
         testdata, testlabel, SNR = data
         testdata, testlabel = testdata.cuda(), testlabel.cuda()
-        outputs, _ = model(testdata)
+        outputs, features = model(testdata)
+        domain_features, invariant_features = feature_decoupling(features)
         _, predict = torch.max(outputs, 1)
         for k in range(len(predict)):
             if predict[k] == testlabel[k]:

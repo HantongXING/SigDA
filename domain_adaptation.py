@@ -9,6 +9,8 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 warnings.filterwarnings('ignore')
 
+from model.feature_decoupling import feature_decoupling, FeatureDecoupler
+
 def run_da():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     data_root_10A = os.path.join(
@@ -41,6 +43,7 @@ def run_da():
     optimizerg = optim.Adam(MT.parameters(), lr=config.da_lr_g)
     criterion = nn.CrossEntropyLoss()
 
+    feature_decoupler = FeatureDecoupler(input_dim=128, domain_dim=64, invariant_dim=64)
 
     precesion_previous = 0
     best_epoch = 0
@@ -87,6 +90,7 @@ def run_da():
             testdata = testdata.cuda()
             testlabel = testlabel.cuda()
             outputs, _, _ = MT(testdata)
+            domain_features, invariant_features = feature_decoupler(test_feature)
             _, predict = torch.max(outputs, 1)
             for k in range(len(predict)):
                 if predict[k] == testlabel[k]:

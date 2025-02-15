@@ -8,6 +8,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 warnings.filterwarnings('ignore')
 
+from model.feature_decoupling import FeatureDecoupler
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 checkpoint_root = os.path.join(current_dir, '../checkpoints', 'mcldnn.pth')
@@ -24,6 +25,8 @@ model = model.cuda()
 optimizer = optim.Adam(model.parameters(), lr=2e-4)
 criterion = nn.CrossEntropyLoss()
 
+feature_decoupler = FeatureDecoupler(input_dim=128, domain_dim=64, invariant_dim=64)
+
 ################################## Training ###############################################
 precesion_previous = 0
 best_epoch = 0
@@ -38,7 +41,8 @@ for epoch in range(1600):
         train_data, train_label = train_data.cuda(), train_label.cuda()
         train_real, train_imag = train_real.cuda(), train_imag.cuda()
 
-        logits, _ = model(train_data, train_real, train_imag)
+        logits, features = model(train_data, train_real, train_imag)
+        domain_features, invariant_features = feature_decoupler(features)
         loss = criterion(logits, train_label)
         optimizer.zero_grad()
         loss.backward()
@@ -63,7 +67,8 @@ for epoch in range(1600):
         testdata, testlabel = testdata.cuda(), testlabel.cuda()
         test_real, test_imag = test_real.cuda(), test_imag.cuda()
 
-        outputs, _ = model(testdata, test_real, test_imag)
+        outputs, features = model(testdata, test_real, test_imag)
+        domain_features, invariant_features = feature_decoupler(features)
         _, predict = torch.max(outputs, 1)
         for k in range(len(predict)):
             if predict[k] == testlabel[k]:
